@@ -6,4 +6,4 @@ class User(models.Model):
     username = models.CharField(max_length=120)
 
     def __str__(self):
-        return str(self.username)
+        return f"The username is {self.username}"
