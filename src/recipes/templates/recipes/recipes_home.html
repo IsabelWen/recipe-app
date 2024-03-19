@@ -96,12 +96,13 @@
         }
 
         .button {
+            text-decoration: none;
             padding: 10px 20px;
             background-color: #426552;
             color: white;
             border: none;
             border-radius: 15px;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             transition: 0.3s ease-in-out;
         }
@@ -114,9 +115,9 @@
 <body>
     <nav>
         <ul>
-            <li class="navitem"><a href="#">Recipes</a></li>
+            <li class="navitem"><a href="{% url 'recipes:recipes' %}">Recipes</a></li>
             <li class="navitem"><a href="#">Ingredients</a></li>
-            <li class="navitem"><h1>Recipe App</h1></li>
+            <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
             <li class="navitem"><a href="#">About us</a></li>
             <li class="navitem"><input type="text" placeholder="Search"></li>
         </ul>
@@ -124,7 +125,7 @@
     <main>
         <div class="main-box">
             <h1>Welcome</h1>
-            <button class="button">Check our recipes!</button>
+            <a href="{% url 'recipes:recipes' %}" class="button">Check our recipes!</a>
         </div>
     </main>
 </body>
