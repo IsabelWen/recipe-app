@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes Details</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #bed4c8;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            align-items: center; 
+            background: #fff;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            flex: 1; 
+        }
+
+        .navitem {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .navitem a {
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+        }
+
+        .navitem h1 {
+            font-size: 35px;
+            font-style: italic;
+            color: #ef9b00;
+        }
+
+        .navitem input {
+            font-size: 20px;
+            background-color: #ef9b00;
+            color: #fff;
+            border: none;
+            padding: 3px;
+        }
+
+        .navitem input::placeholder {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        main {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-box {
+            padding: 30px;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.23);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7px);
+        }
+
+        .main-box ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .main-box ul li{
+            margin: 15px;
+        }
+
+        .main-box ul li img{
+            max-width: 100%;
+            height: auto;
+        }
+
+        .main-box h2 a{
+            font-size: 25px;
+            text-decoration: none;
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="navitem"><a href="#">Recipes</a></li>
+            <li class="navitem"><a href="#">Ingredients</a></li>
+            <li class="navitem"><h1>Recipe App</h1></li>
+            <li class="navitem"><a href="#">About us</a></li>
+            <li class="navitem"><input type="text" placeholder="Search"></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="main-box">
+            <ul>
+                {% for object in object_list %}
+                <li>
+                    <h2><a href ="{{object.get_absolute_url}}">{{object.name}}</a></h2>
+                    <img src="{{object.pic.url}}" width="150" height="200" />
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
