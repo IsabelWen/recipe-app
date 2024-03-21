@@ -8,4 +8,4 @@ class User(models.Model):
     bio = models.TextField(default="No bio...")
 
     def __str__(self):
-        return f"The username is {self.username}"
+        return f"{self.username}"
