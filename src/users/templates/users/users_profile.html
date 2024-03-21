@@ -113,12 +113,12 @@
     </nav>
     <main>
         <div class="left">
-        <img src="{{user.pic.url}}" width="200" height="300" />
+        <img src="{{current_user.user.pic.url}}" width="200" height="300" />
         </div>
         <div class="bio">
-            <h2>{{user.name}}</h2>
-            <p><b>Username: </b>{{user.username}}</p>
-            <p><b>Bio: </b><br/>{{user.bio|linebreaksbr}}</p>
+            <h2>{{current_user.user.name}}</h2>
+            <p><b>Username: </b>{{current_user.user.username}}</p>
+            <p><b>Bio: </b><br/>{{current_user.user.bio|linebreaksbr}}</p>
         </div>
     </main>
 </body>
