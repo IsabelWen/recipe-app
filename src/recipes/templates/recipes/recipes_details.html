@@ -1,67 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/nav.css' %}">
     <title>Recipes List</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #bed4c8;
-        }
-        
-        header {
-            display: flex;
-            justify-content: space-between;
-            text-align: center;
-        }
-
-        nav {
-            display: flex;
-            align-items: center; 
-            background: #fff;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            flex: 1; 
-        }
-
-        .navitem {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            flex: 1;
-        }
-
-        .navitem a {
-            text-decoration: none;
-            color: #000;
-            font-size: 20px;
-        }
-
-        .navitem h1 {
-            font-size: 35px;
-            font-style: italic;
-            color: #ef9b00;
-        }
-
-        .navitem input {
-            font-size: 20px;
-            background-color: #ef9b00;
-            color: #fff;
-            border: none;
-            padding: 3px;
-        }
-
-        .navitem input::placeholder {
-            color: #fff;
-            font-size: 18px;
         }
 
         h2 {
