@@ -77,7 +77,7 @@
             <p><b>Cooking time: </b>{{object.cooking_time}}</p>
             <p><b>Difficulty: </b>{{recipe.difficulty}}</p>
             <p><b>Ingredients: </b>{{object.ingredients}}</p>
-            <p><b>Instructions: </b><br/>{{object.instructions|linebreaksbr}}</p>
+            <p><b>Instructions: </b><br/>{{object.instructions|safe}}</p>
         </div>
     </main>
 </body>

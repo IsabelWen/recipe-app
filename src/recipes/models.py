@@ -6,9 +6,9 @@ class Recipe(models.Model):
     name =  models.CharField(max_length=100)
     cooking_time = models.IntegerField(help_text='in min', default=0)
     ingredients = models.CharField(max_length=250, help_text="Each ingredient seperated by a comma, like 'Eggs, Butter'")
-    pic = models.ImageField(upload_to='recipes', default='no_picture.jpg')
-    author = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    instructions = models.TextField(default="No instructions...")
+    pic = models.ImageField(upload_to='recipes', help_text="Choose an image with minimum 250px width.", default='no_picture.jpg')
+    author = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    instructions = models.TextField(help_text="No instructions...", null=True, blank=True)
     difficulty = models.CharField(max_length=120, default='')
 
     def __str__(self):

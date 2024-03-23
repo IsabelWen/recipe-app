@@ -26,7 +26,7 @@ def login_view(request):
             if user is not None:
             #then login
                 login(request, user)                
-                return redirect('recipes:recipes')
+                return redirect('users:profile')
         else: 
             error_message ='Something went wrong.'
 
