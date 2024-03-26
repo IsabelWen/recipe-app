@@ -38,16 +38,12 @@ class RecipeModelTest(TestCase):
         max_length = recipe._meta.get_field('ingredients').max_length
         self.assertEqual(max_length, 250, 'ingredients has over 250 characters')
 
-    # test to see if function for getting the recipe details url works
-    def test_get_absolute_url(self):
-       recipe = Recipe.objects.get(id=1)
-       #get_absolute_url() should take you to the detail page of recipe #1
-       #and load the URL /recipes/1
-       self.assertEqual(recipe.get_absolute_url(), '/recipes/1')
-
     # test to see if calculate_difficulty works
     def test_calculate_difficulty(self):
         # When time >= 10 min and ingredients < 4 difficulty should be 'Intermediate'
         recipe = Recipe(cooking_time=15, ingredients="Ingredient 1, Ingredient 2")
         self.assertEqual(recipe.difficulty, "Intermediate")
-    
+
+class RecipeAuthTest(TestCase):
+    def setUpTestData():
+        pass

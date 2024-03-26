@@ -21,19 +21,69 @@
             justify-content: center;
         }
 
+        main p {
+            font-size: 18px;
+        }
+
         .main-box {
             padding: 30px;
             width: 80%;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+        }
+
+        .main-box form {
+            margin-bottom: 15px;
+        }
+
+        .main-box form input {
+            font-size: 18px;
+            background-color: #ef9b00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 3px;
+            margin: 5px;
+        }
+
+        .main-box form input::placeholder {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .main-box select {
+            font-size: 18px;
+            background-color: #ef9b00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 3px;
+            margin: 5px;
+        }
+
+        .main-box button {
+            padding: 3px 10px;
+            margin: 5px;
+            background-color: #426552;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .main-box button:hover {
+            transform: scale(1.025);
         }
 
         .main-box ul {
             list-style-type: none;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: space-evenly;
         }
 
         .main-box ul li{
@@ -70,19 +120,45 @@
             <li class="navitem"><a href="{% url 'users:profile' %}">Profile</a></li>
             <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
             <li class="navitem"><a href ="{%url 'logout' %}"> Logout </a></li>
-            <li class="navitem"><input type="text" placeholder="Search"></li>
+            <li class="navitem"><a href="#">Something</a></li>
         </ul>
     </nav>
     <main>
         <div class="main-box">
-            <ul>
-                {% for object in object_list %}
-                <li>
-                    <h2><a href ="{{object.get_absolute_url}}">{{object.name}}</a></h2>
-                    <img src="{{object.pic.url}}" />
-                </li>
-                {% endfor %}
-            </ul>
+            <p>Search for an ingredient or recipe name:</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.recipe_name }}
+                {{ form.chart_type }}
+                <button type="submit">Search</button>
+                <a href="{% url 'recipes:recipes' %}"><button type="button">Show all</button></a>
+            </form>
+            {% if form.is_bound %}
+                <p>You searched for: {{ form.recipe_name.value }}</p>
+                {% if not recipes.empty %}
+                    <ul>
+                    {% for index, recipe in recipes.iterrows %}
+                        <li>
+                            <h2><a href="{% url 'recipes:detail' pk=recipe.id %}">{{ recipe.name }}</a></h2>
+                            <img src="/media/{{ recipe.pic }}" />
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    <h1>Data Analytics</h1>
+                    <img src="data:image/png;base64, {{chart|safe}}">
+                {% else  %}
+                    <h3>No data</h3>
+                {% endif  %}
+            {% else  %}
+                <ul>
+                    {% for recipe in recipes %}
+                        <li>
+                            <h2><a href="{% url 'recipes:detail' pk=recipe.id %}">{{ recipe.name }}</a></h2>
+                            <img src="{{ recipe.pic.url }}" />
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     </main>
 </body>

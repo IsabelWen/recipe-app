@@ -1,5 +1,5 @@
 from django.db import models
-from django.shortcuts import reverse
+from django.utils import timezone
 from users.models import User
 
 class Recipe(models.Model):
@@ -10,12 +10,10 @@ class Recipe(models.Model):
     author = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     instructions = models.TextField(help_text="No instructions...", null=True, blank=True)
     difficulty = models.CharField(max_length=120, default='')
+    date_created = models.DateField(default=timezone.now)
 
     def __str__(self):
         return f"{self.name} - {self.difficulty} - {self.cooking_time}"
-    
-    def get_absolute_url(self):
-        return reverse ('recipes:detail', kwargs={'pk': self.pk})
     
     @property
     def difficulty(self):

@@ -4,6 +4,8 @@ migrate:
 	python manage.py migrate
 makemigrations:
 	python manage.py makemigrations
+test:
+	python manage.py test
 install-dev:
 	pip install -r requirements/dev.txt
 install-base:

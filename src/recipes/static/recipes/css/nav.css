@@ -37,16 +37,3 @@ nav ul {
     font-style: italic;
     color: #ef9b00;
 }
-
-.navitem input {
-    font-size: 20px;
-    background-color: #ef9b00;
-    color: #fff;
-    border: none;
-    padding: 3px;
-}
-
-.navitem input::placeholder {
-    color: #fff;
-    font-size: 18px;
-}
