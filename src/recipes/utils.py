@@ -62,7 +62,7 @@ def get_chart(chart_type, data, **kwargs):
         plt.title('Recipes by Difficulty')
 
     elif chart_type == '#3':
-        # Line chart Average cooking time by difficulty level
+        # Line chart Number of Recipes Created per Day
         plt.rcParams.update({'axes.facecolor': 'none'})
         data['formatted_date'] = data['date_created'].apply(lambda x: x.strftime('%Y-%m-%d')) #format date_created
         recipes_per_day = data.groupby(data['formatted_date']).size()
