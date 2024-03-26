@@ -1,6 +1,8 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from .models import CustomUser
 from django.contrib.auth.models import User
+from django.urls import reverse
+from users.models import User
 
 # Create your tests here.
 class UserModelTest(TestCase):
@@ -36,3 +38,24 @@ class UserModelTest(TestCase):
         user = CustomUser.objects.get(id=1)
         field_label = user._meta.get_field('bio').verbose_name
         self.assertEqual(field_label, 'bio')
+
+class UserAuthTest(TestCase):
+    def setUpTestData():
+        Client()
+        user = User.objects.create_user(username='testuser', password='testpassword')
+        CustomUser.objects.create(
+            user = user,
+            name='testcustomuser',
+            bio='Example bio'
+        )
+
+    def test_profile_redirect_without_auth(self):
+        response = self.client.get(reverse('users:profile'))
+        self.assertRedirects(response, f'/login/?next={reverse("users:profile")}')
+    
+    def test_profile_redirect_with_auth(self):
+        login = self.client.login(username='testuser', password='testpassword')
+        response = self.client.get(reverse('users:profile'))
+        self.assertTrue(login)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'users/users_profile.html')

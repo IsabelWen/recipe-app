@@ -1,5 +1,9 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from .models import Recipe
+from django.utils import timezone
+from datetime import date
+from django.urls import reverse
+from users.models import User
 
 # Create your tests here.
 class RecipeModelTest(TestCase):
@@ -7,7 +11,8 @@ class RecipeModelTest(TestCase):
         Recipe.objects.create(
             name='Banana Pancakes', 
             cooking_time=8, 
-            ingredients='Banana, Eggs, Baking Powder')
+            ingredients='Banana, Eggs, Baking Powder',
+            date_created=timezone.now())
         
     # test to see if the recipe's name is initialized as expected
     def test_recipe_name(self):
@@ -38,7 +43,15 @@ class RecipeModelTest(TestCase):
         max_length = recipe._meta.get_field('ingredients').max_length
         self.assertEqual(max_length, 250, 'ingredients has over 250 characters')
 
-    # test to see if calculate_difficulty works
+    # test to see if date_created is initialized as expected
+    def test_date_created(self):
+        recipe = Recipe.objects.get(id=1)
+        self.assertIsInstance(recipe.date_created, date)
+        self.assertEqual(recipe.date_created.year, timezone.now().date().year)
+        self.assertEqual(recipe.date_created.month, timezone.now().date().month)
+        self.assertEqual(recipe.date_created.day, timezone.now().date().day)
+
+    # test to see if calculate_difficulty works 
     def test_calculate_difficulty(self):
         # When time >= 10 min and ingredients < 4 difficulty should be 'Intermediate'
         recipe = Recipe(cooking_time=15, ingredients="Ingredient 1, Ingredient 2")
@@ -46,4 +59,33 @@ class RecipeModelTest(TestCase):
 
 class RecipeAuthTest(TestCase):
     def setUpTestData():
-        pass
+        Client()
+        user = User.objects.create_user(username='testuser', password='testpassword')
+        Recipe.objects.create(
+            name='Banana Pancakes',
+            ingredients='Banana, Eggs, Baking Powder',
+            author=user)
+
+    def test_list_redirect_without_auth(self):
+        response = self.client.get(reverse('recipes:recipes'))
+        self.assertRedirects(response, f'/login/?next={reverse("recipes:recipes")}')
+
+    def test_details_redirect_without_auth(self):
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.get(reverse('recipes:detail', args=[recipe.id]))
+        self.assertRedirects(response, f'/login/?next={reverse("recipes:detail", args=[recipe.id])}')
+    
+    def test_list_redirect_with_auth(self):
+        login = self.client.login(username='testuser', password='testpassword')
+        response = self.client.get(reverse('recipes:recipes'))
+        self.assertTrue(login)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'recipes/recipes_list.html')
+
+    def test_details_redirect_with_auth(self):
+        login = self.client.login(username='testuser', password='testpassword')
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.get(reverse('recipes:detail', args=[recipe.id]))
+        self.assertTrue(login)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'recipes/recipes_details.html')
