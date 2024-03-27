@@ -9,7 +9,7 @@ class Recipe(models.Model):
     pic = models.ImageField(upload_to='recipes', help_text="Choose an image with minimum 250px width.", default='no_picture.jpg')
     author = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     instructions = models.TextField(help_text="No instructions...", null=True, blank=True)
-    difficulty = models.CharField(max_length=120, default='')
+    _difficulty = models.CharField(max_length=120, default='')
     date_created = models.DateField(default=timezone.now)
 
     def __str__(self):
@@ -17,12 +17,18 @@ class Recipe(models.Model):
     
     @property
     def difficulty(self):
+        if self._difficulty == '':
+            self.calc_difficilty()
+        return self._difficulty
+    
+    def calc_difficilty(self):
         ingredients_len = len(self.ingredients.split(", "))
         if self.cooking_time < 10 and ingredients_len < 4:
-            return "Easy"
+            self._difficulty = "Easy"
         elif self.cooking_time < 10 and ingredients_len >= 4:
-            return "Medium"
+            self._difficulty = "Medium"
         elif self.cooking_time >= 10 and ingredients_len < 4:
-            return "Intermediate"
+            self._difficulty = "Intermediate"
         elif self.cooking_time >= 10 and ingredients_len >= 4:
-            return "Hard"
+            self._difficulty = "Hard"
+        
