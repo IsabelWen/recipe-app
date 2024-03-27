@@ -55,6 +55,11 @@
             margin-bottom: 5px;
             font-size: 18px;
         }
+
+        .details p a {
+            color: #ef9b00;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -73,11 +78,11 @@
         <img src="{{object.pic.url}}" width="200" height="300" />
         </div>
         <div class="details">
-            <p><b>Author: </b>{{object.author}}</p>
-            <p><b>Cooking time: </b>{{object.cooking_time}}</p>
-            <p><b>Difficulty: </b>{{recipe.difficulty}}</p>
-            <p><b>Ingredients: </b>{{object.ingredients}}</p>
-            <p><b>Instructions: </b><br/>{{object.instructions|safe}}</p>
+            <p><b>Author: </b><a href="{% url 'recipes:author' object.author.pk %}">{{ object.author|capfirst }}</a></p>
+            <p><b>Cooking time: </b>{{ object.cooking_time }}</p>
+            <p><b>Difficulty: </b>{{ recipe.difficulty }}</p>
+            <p><b>Ingredients: </b>{{ object.ingredients }}</p>
+            <p><b>Instructions: </b><br/>{{ object.instructions|safe }}</p>
         </div>
     </main>
 </body>

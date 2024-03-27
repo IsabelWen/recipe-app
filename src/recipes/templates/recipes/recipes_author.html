@@ -1,0 +1,156 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'recipes/css/nav.css' %}">
+    <title>Author</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #bed4c8;
+            display: grid;
+            
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            padding: 30px;
+            width: 90%;
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        .left {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            align-items: left;
+        }
+
+        .left img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+
+        .left .info p {
+            align-self: flex-start;
+        }
+
+        hr { 
+            border: none;
+            border-left: 1px solid rgb(66, 101, 82, 0.5);
+            width: 1px;       
+            }
+
+        .right {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        .main-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .main-box ul {
+            padding: 30px;
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        .main-box ul li{
+            width: 29%;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(7px);
+        }
+
+        .main-box ul li img{
+            width: 100%;
+            min-width: 250px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .main-box ul li a{
+            text-decoration: none;
+        }
+
+        .main-box h2 {
+            font-size: 25px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="navitem"><a href="{% url 'recipes:home' %}">Home</a></li>
+            <li class="navitem"><a href="{% url 'recipes:recipes' %}">Recipes</a></li>
+            <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+            <li class="navitem"><a href="{% url 'users:profile' %}">Profile</a></li>
+            <li class="navitem"><a href ="{%url 'logout' %}"> Logout </a></li>
+        </ul>
+    </nav>
+    <main>
+    <div class="main-container">
+        <div class="left">
+            <h2>{{ object.username|capfirst }}'s Info</h2>
+            <img src="{{ object.customuser.pic.url}}" alt="">
+            <div class="info">
+                <p><b>Username: </b>{{ object.username|capfirst }}</p>
+                <p><b>Bio: </b><br/>{{ object.customuser.bio }}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="right">
+            <h2>All Recipes by {{ object.username|capfirst }}</h2>
+            <div class="main-box">
+                <ul>
+                    {% for recipe in recipes %}
+                    <li>
+                        <a href="{% url 'recipes:detail' pk=recipe.id %}">
+                            <h2>{{ recipe.name }}</h2>
+                            <img src="{{ recipe.pic.url }}" />
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    </main>
+</body>
+</html>

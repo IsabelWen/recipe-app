@@ -105,9 +105,12 @@
             border-radius: 10px;
         }
 
-        .main-box h2 a{
-            font-size: 25px;
+        .main-box ul li a{
             text-decoration: none;
+        }
+
+        .main-box h2 {
+            font-size: 25px;
             color: #000;
         }
 
@@ -120,7 +123,11 @@
             <li class="navitem"><a href="{% url 'recipes:recipes' %}">Recipes</a></li>
             <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
             <li class="navitem"><a href="{% url 'users:profile' %}">Profile</a></li>
-            <li class="navitem"><a href ="{%url 'logout' %}"> Logout </a></li>
+            {% if user.is_authenticated %}
+                <li class="navitem"><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li class="navitem"><a href ="{%url 'login' %}">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
     <main>
@@ -139,8 +146,10 @@
                     <ul>
                     {% for index, recipe in recipes.iterrows %}
                         <li>
-                            <h2><a href="{% url 'recipes:detail' pk=recipe.id %}">{{ recipe.name }}</a></h2>
-                            <img src="/media/{{ recipe.pic }}" />
+                            <a href="{% url 'recipes:detail' pk=recipe.id %}">
+                                <h2>{{ recipe.name }}</h2>
+                                <img src="/media/{{ recipe.pic }}" />
+                            </a>
                         </li>
                     {% endfor %}
                     </ul>
@@ -153,8 +162,10 @@
                 <ul>
                     {% for recipe in recipes %}
                         <li>
-                            <h2><a href="{% url 'recipes:detail' pk=recipe.id %}">{{ recipe.name }}</a></h2>
-                            <img src="{{ recipe.pic.url }}" />
+                            <a href="{% url 'recipes:detail' pk=recipe.id %}">
+                                <h2>{{ recipe.name }}</h2>
+                                <img src="{{ recipe.pic.url }}" />
+                            </a>
                         </li>
                     {% endfor %}
                 </ul>

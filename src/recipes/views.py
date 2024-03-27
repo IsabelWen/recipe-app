@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Recipe
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -7,12 +7,13 @@ from .forms import RecipesSearchForm
 from .utils import get_recipename_from_id, get_chart
 from django.db.models import Q
 from django.urls import reverse
+from users.models import User
 
 # Create your views here.
 def home(request):
    return render(request, 'recipes/recipes_home.html')
 
-class RecipesListView(LoginRequiredMixin, ListView):
+class RecipesListView(ListView):
    model = Recipe
 
    def get(self, request):
@@ -49,3 +50,15 @@ class RecipesListView(LoginRequiredMixin, ListView):
 class RecipesDetailView(LoginRequiredMixin, DetailView):
    model = Recipe
    template_name = 'recipes/recipes_details.html'
+
+class RecipesAuthorView(LoginRequiredMixin, DetailView):
+   model = User
+   template_name = 'recipes/recipes_author.html'
+
+   def get_queryset(self):
+      return User.objects.filter(pk=self.kwargs['pk'])
+
+   def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)
+      context['recipes'] = Recipe.objects.filter(author=self.object)
+      return context

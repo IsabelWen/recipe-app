@@ -66,10 +66,6 @@ class RecipeAuthTest(TestCase):
             ingredients='Banana, Eggs, Baking Powder',
             author=user)
 
-    def test_list_redirect_without_auth(self):
-        response = self.client.get(reverse('recipes:recipes'))
-        self.assertRedirects(response, f'/login/?next={reverse("recipes:recipes")}')
-
     def test_details_redirect_without_auth(self):
         recipe = Recipe.objects.get(id=1)
         response = self.client.get(reverse('recipes:detail', args=[recipe.id]))

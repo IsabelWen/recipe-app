@@ -42,7 +42,7 @@ def get_chart(chart_type, data, **kwargs):
     fig=plt.figure(figsize=(6,5), facecolor="none")
 
     #select chart_type based on user input from the form
-    if chart_type == '#1':
+    if chart_type == 'bar_chart':
         # Bar chart for time
         plt.rcParams.update({'axes.facecolor': 'none'})
         plt.bar(data['name'], data['cooking_time'], color='#135E46')
@@ -53,7 +53,7 @@ def get_chart(chart_type, data, **kwargs):
         plt.gca().spines['top'].set_visible(False) #make top side of frame invisible
         plt.title('Recipes by Cooking Time')
 
-    elif chart_type == '#2':
+    elif chart_type == 'pie_chart':
         # Pie chart for difficulty levels
         difficulty_counts = data['difficulty'].value_counts()
         labels = difficulty_counts.index
@@ -61,7 +61,7 @@ def get_chart(chart_type, data, **kwargs):
         plt.pie(values, labels=labels, autopct='%1.1f%%', colors=['#135E46', '#478966', '#73A788', '#53BD99'])
         plt.title('Recipes by Difficulty')
 
-    elif chart_type == '#3':
+    elif chart_type == 'line_chart':
         # Line chart Number of Recipes Created per Day
         plt.rcParams.update({'axes.facecolor': 'none'})
         data['formatted_date'] = data['date_created'].apply(lambda x: x.strftime('%Y-%m-%d')) #format date_created
