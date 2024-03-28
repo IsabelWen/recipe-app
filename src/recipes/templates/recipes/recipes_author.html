@@ -180,16 +180,20 @@
         <div class="right">
             <h2>All Recipes by {{ object.username|capfirst }}</h2>
             <div class="main-box">
-                <ul>
-                    {% for recipe in recipes %}
-                    <li>
-                        <a href="{% url 'recipes:detail' pk=recipe.id %}">
-                            <h2>{{ recipe.name }}</h2>
-                            <img src="{{ recipe.pic.url }}" />
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
+                {% if recipes %}
+                    <ul>
+                        {% for recipe in recipes %}
+                        <li>
+                            <a href="{% url 'recipes:detail' pk=recipe.id %}">
+                                <h2>{{ recipe.name }}</h2>
+                                <img src="{{ recipe.pic.url }}" />
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>{{ object.username|capfirst }} has no recipes yet.</p>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Recipe
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 import pandas as pd
-from .forms import RecipesSearchForm
+from .forms import RecipesSearchForm, CreateRecipeForm
 from .utils import get_recipename_from_id, get_chart
 from django.db.models import Q
 from django.urls import reverse
@@ -62,3 +63,39 @@ class RecipesAuthorView(LoginRequiredMixin, DetailView):
       context = super().get_context_data(**kwargs)
       context['recipes'] = Recipe.objects.filter(author=self.object)
       return context
+
+# Function to create a recipe
+@login_required
+def create_recipe(request):
+   if request.method == 'POST':
+      form = CreateRecipeForm(request.POST, request.FILES)
+      if form.is_valid():
+         recipe = form.save(commit=False)
+         recipe.author = request.user
+         recipe.save()
+      else:
+         print('Something went wrong.')
+
+   return redirect('recipes:recipes')
+
+# Function to update a recipe
+@login_required
+def update_recipe(request, pk):
+   recipe = get_object_or_404(Recipe, pk=pk)
+   if request.method == 'POST':
+      form = CreateRecipeForm(request.POST, request.FILES, instance=recipe)
+      if form.is_valid():
+         recipe.save()
+         return redirect('recipes:detail', pk=recipe.pk)
+      else:
+         form = CreateRecipeForm(instance=recipe)
+         print('Something went wrong.')
+
+   return render(request, 'recipes/recipes_details.html', {'object': recipe})
+
+# Function to delete a recipe
+@login_required
+def delete_recipe(request, pk):
+   recipe = get_object_or_404(Recipe, pk=pk)
+   recipe.delete()
+   return redirect('recipes:recipes')
