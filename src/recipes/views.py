@@ -14,6 +14,8 @@ from users.models import User
 def home(request):
    return render(request, 'recipes/recipes_home.html')
 
+def about(request):
+   return render(request, 'recipes/about_me.html')
 class RecipesListView(ListView):
    model = Recipe
 

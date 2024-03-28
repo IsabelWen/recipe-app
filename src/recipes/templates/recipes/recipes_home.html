@@ -90,6 +90,14 @@
             transform: scale(1.05);
         }
 
+        .link {
+            text-decoration: none;
+            color: #426552;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
         @media all and (max-width: 550px) {
             .main-box {
                 padding: 35px 55px;
@@ -131,6 +139,7 @@
             <h1>Welcome</h1>
             <a href="{% url 'recipes:recipes' %}" class="button">Check our recipes!</a>
             <a data-open-modal class="button">Create new recipe</a>
+            <a href="{% url 'recipes:about' %}" class="link">About me</a>
             <dialog data-modal>
                 
                 <h2>Create Recipe</h2>
