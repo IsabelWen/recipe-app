@@ -21,15 +21,18 @@
             display: flex;
             align-items: center; 
             background: #fff;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
         }
 
         nav ul {
             list-style-type: none;
             padding: 0;
-            overflow: hidden;
             display: flex;
+            justify-content: space-around;
+            width: 100%;
             align-items: center;
-            flex: 1; 
         }
 
         .navitem {
@@ -51,17 +54,8 @@
             color: #ef9b00;
         }
 
-        .navitem input {
-            font-size: 20px;
-            background-color: #ef9b00;
-            color: #fff;
-            border: none;
-            padding: 3px;
-        }
-
-        .navitem input::placeholder {
-            color: #fff;
-            font-size: 18px;
+        #small {
+            display: none;
         }
 
         main {
@@ -74,12 +68,12 @@
         }
 
         .left {
-            padding-right: 35px;
+            padding-right: 10px;
         }
 
         .left img {
             min-width: 500px;
-            max-width: 100%;
+            max-width: 50%;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -87,6 +81,7 @@
 
         .bio {
             padding: 25px;
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -99,21 +94,101 @@
             margin-bottom: 10px;
             font-size: 18px;
         }
+
+
+        @media all and (min-width: 800px) and (max-width: 1400px) {
+            main {
+                margin-top: 30px;
+                padding: 10px 0px;
+                width: 100vw;
+            }
+
+            .left {
+                padding-right: 15px;
+                width: 30%;
+            }
+
+            .left img {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+            }
+
+            .bio {
+                width: 60%;
+                padding: 15px;
+            }
+        }
+
+        @media all and (max-width: 800px) {
+            h2 {
+                font-size: 25px;
+                margin-top: 30px;
+            }
+
+            main {
+                margin-top: 30px;
+                padding: 5px 0px;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .left {
+                display: flex;
+                justify-content: center;
+                padding: 0px;
+                width: 50%;
+                max-width: 100vw;
+            }
+
+            .left img {
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                margin-bottom: 20px;
+            }
+
+            .bio {
+                width: 70%;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media all and (max-width: 550px) {
+            #big {
+                display: none;
+            }
+            #small {
+                display: block;
+                width: 100%;
+            }
+            .smalldiv {
+                width: 100%;
+                display: block;
+                align-items: center;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
     <nav>
+        <div class="smalldiv">
+            <li class="navitem" id="small"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+        </div>
         <ul>
             <li class="navitem"><a href="{% url 'recipes:home' %}">Home</a></li>
             <li class="navitem"><a href="{% url 'recipes:recipes' %}">Recipes</a></li>
-            <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+            <li class="navitem" id="big"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
             <li class="navitem"><a href="{% url 'users:profile' %}">Profile</a></li>
             <li class="navitem"><a href ="{%url 'logout' %}"> Logout </a></li>
         </ul>
     </nav>
     <main>
         <div class="left">
-        <img src="{{current_user.pic.url}}" width="200" height="300" alt="user.username"/>
+        <img src="{{current_user.pic.url}}" alt="user.username"/>
         </div>
         <div class="bio">
             <h2>{{current_user.name}}</h2>

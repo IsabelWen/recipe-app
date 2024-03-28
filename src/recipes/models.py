@@ -31,4 +31,4 @@ class Recipe(models.Model):
             self._difficulty = "Intermediate"
         elif self.cooking_time >= 10 and ingredients_len >= 4:
             self._difficulty = "Hard"
-        
+            

@@ -81,6 +81,8 @@
 
         .main-box ul {
             list-style-type: none;
+            margin: 0; 
+            padding: 0; 
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
@@ -119,14 +121,63 @@
             color: #000;
         }
 
+        h1 {
+            font-size: 30px;
+            margin-top: 30px;
+        }
+
+        @media all and (max-width: 550px) {
+            main {
+                margin-top: 30px;
+                padding: 10px;
+            }
+
+            .main-box {
+                padding: 10px;
+                width: 95%;
+            }
+
+            .main-box p {
+                margin-left: 25px;
+            }
+
+            .main-box form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .main-box button {
+                width: 95%;
+            }
+
+            .main-box ul li img{
+                width: 100%;
+                min-width: 250px;
+                height: auto;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+            .data-analytics {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
     </style>
 </head>
 <body>
     <nav>
+        <div class="smalldiv">
+            <li class="navitem" id="small"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+        </div>
         <ul>
             <li class="navitem"><a href="{% url 'recipes:home' %}">Home</a></li>
             <li class="navitem"><a href="{% url 'recipes:recipes' %}">Recipes</a></li>
-            <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+            <li class="navitem" id="big"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
             <li class="navitem"><a href="{% url 'users:profile' %}">Profile</a></li>
             {% if user.is_authenticated %}
                 <li class="navitem"><a href="{% url 'logout' %}">Logout</a></li>
@@ -159,7 +210,7 @@
                     {% endfor %}
                     </ul>
                     <h1>Data Analytics</h1>
-                    <img src="data:image/png;base64, {{chart|safe}}">
+                    <img class="data-analytics" src="data:image/png;base64, {{chart|safe}}">
                 {% else  %}
                     <h3>No data</h3>
                 {% endif  %}

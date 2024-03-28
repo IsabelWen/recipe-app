@@ -48,6 +48,8 @@
 
         .left .info p {
             align-self: flex-start;
+            font-size: 18px;
+            text-align: justify;
         }
 
         hr { 
@@ -117,14 +119,49 @@
             font-size: 25px;
             color: #000;
         }
+
+        @media all and (max-width: 550px) {
+            .main-container {
+                padding: 10px;
+                width: 100%;
+                margin-top: 30px;
+            }
+
+            .left {
+                width: 45%;
+            }
+
+            .right {
+                width: 55%;
+            }
+
+            h2 {
+                font-size: 25px;
+            }
+
+            .main-box {
+                width: 100%;
+            }
+
+            .main-box ul {
+                padding: 20px;
+            }
+
+            .main-box h2 {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
     <nav>
+        <div class="smalldiv">
+            <li class="navitem" id="small"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+        </div>
         <ul>
             <li class="navitem"><a href="{% url 'recipes:home' %}">Home</a></li>
             <li class="navitem"><a href="{% url 'recipes:recipes' %}">Recipes</a></li>
-            <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+            <li class="navitem" id="big"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
             <li class="navitem"><a href="{% url 'users:profile' %}">Profile</a></li>
             <li class="navitem"><a href ="{%url 'logout' %}"> Logout </a></li>
         </ul>

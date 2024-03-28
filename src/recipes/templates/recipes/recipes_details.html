@@ -60,14 +60,74 @@
             color: #ef9b00;
             text-decoration: none;
         }
+
+        @media all and (min-width: 800px) and (max-width: 1400px) {
+            main {
+                margin: 0;
+                padding: 10px 40px;
+            }
+
+            .left {
+                padding-right: 15px;
+            }
+
+            .left img {
+                min-width: 350px;
+            }
+
+            .details {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            .details p {
+                font-size: 18px;
+            }
+        }
+
+        @media all and (max-width: 800px) {
+            h2 {
+                font-size: 25px;
+                margin-top: 30px;
+            }
+
+            main {
+                margin: 0;
+                padding: 5px 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .left {
+                display: flex;
+                justify-content: center;
+                padding-right: 0px;
+                width: 93%;
+                max-width: 100vw;
+            }
+
+            .left img {
+                max-width: 100%;
+                min-width: 0;
+                margin-bottom: 20px;
+            }
+
+            .details {
+                width: 90%;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <nav>
+        <div class="smalldiv">
+            <li class="navitem" id="small"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+        </div>
         <ul>
             <li class="navitem"><a href="{% url 'recipes:home' %}">Home</a></li>
             <li class="navitem"><a href="{% url 'recipes:recipes' %}">Recipes</a></li>
-            <li class="navitem"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
+            <li class="navitem" id="big"><a href="{% url 'recipes:home' %}"><h1>Recipe App</h1></a></li>
             <li class="navitem"><a href="{% url 'users:profile' %}">Profile</a></li>
             <li class="navitem"><a href ="{%url 'logout' %}"> Logout </a></li>
         </ul>
@@ -75,7 +135,7 @@
     <h2>{{object.name}}</h2>
     <main>
         <div class="left">
-        <img src="{{object.pic.url}}" width="200" height="300" />
+        <img src="{{object.pic.url}}" />
         </div>
         <div class="details">
             <p><b>Author: </b><a href="{% url 'recipes:author' object.author.pk %}">{{ object.author|capfirst }}</a></p>
