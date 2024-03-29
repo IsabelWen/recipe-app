@@ -15,14 +15,12 @@ ALLOWED_HOSTS = ["127.0.0.1", "recipe-app-hedk.onrender.com"]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default=env.str('DATABASE_URL'),
+        conn_max_age=600
+    )
 }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 
 MEDIA_URL = '/media/'
@@ -31,7 +29,7 @@ MEDIA_ROOT= BASE_DIR / 'media'
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[
-   BASE_DIR / 'static'
+   BASE_DIR / 'recipes' / 'static'
 ]
 # The absolute path to the directory where collectstatic will collect static files for deployment.
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR /  'staticfiles'
