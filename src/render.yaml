@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: recipe-app
+    buildCommand: "./build.sh"
+    env: python
+    startCommand: "gunicorn recipe_project.wsgi:application"
