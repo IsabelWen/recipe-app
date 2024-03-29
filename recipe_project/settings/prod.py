@@ -27,10 +27,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT= BASE_DIR / 'media'
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-STATICFILES_DIRS=[
-   BASE_DIR / 'static'
-]
+STATIC_URL = 'static/'
+STATICFILES_DIRS=[BASE_DIR / 'static']
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = BASE_DIR /  'staticfiles'
