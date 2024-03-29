@@ -9,7 +9,7 @@ environ.Env.read_env(str(BASE_DIR / ".env"))
 SECRET_KEY = env.str("SECRET_KEY")
 DEBUG = env.bool("DEBUG")
 
-# ALLOWED_HOSTS = ["netlify.example.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "https://recipe-app-hedk.onrender.com"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
