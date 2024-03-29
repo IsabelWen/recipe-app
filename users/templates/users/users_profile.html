@@ -203,7 +203,7 @@
             <h2>{{current_user.name}}</h2>
             <p><b>Username: </b>{{user.username}}</p>
             <p><b>Bio: </b><br/>{{current_user.bio|linebreaksbr}}</p>
-            <a class="link" href="{% url 'recipes:author' object.user.pk %}">See all of you recipes.</a>
+            <a class="link" href="{% url 'recipes:author' object.user.pk %}">See all of your recipes.</a>
         </div>
     </main>
 </body>
