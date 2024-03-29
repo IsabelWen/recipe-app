@@ -1,11 +1,12 @@
 from django.test import TestCase, Client
 from .models import Recipe
+from .forms import RecipesSearchForm, CreateRecipeForm
 from django.utils import timezone
 from datetime import date
 from django.urls import reverse
 from users.models import User
 
-# Create your tests here.
+# Test model
 class RecipeModelTest(TestCase):
     def setUpTestData():
         Recipe.objects.create(
@@ -57,6 +58,7 @@ class RecipeModelTest(TestCase):
         recipe = Recipe(cooking_time=15, ingredients="Ingredient 1, Ingredient 2")
         self.assertEqual(recipe.difficulty, "Intermediate")
 
+# Test auth
 class RecipeAuthTest(TestCase):
     def setUpTestData():
         Client()
@@ -65,12 +67,18 @@ class RecipeAuthTest(TestCase):
             name='Banana Pancakes',
             ingredients='Banana, Eggs, Baking Powder',
             author=user)
-
+    # without auth
     def test_details_redirect_without_auth(self):
         recipe = Recipe.objects.get(id=1)
         response = self.client.get(reverse('recipes:detail', args=[recipe.id]))
         self.assertRedirects(response, f'/login/?next={reverse("recipes:detail", args=[recipe.id])}')
     
+    def test_author_redirect_without_auth(self):
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.get(reverse('recipes:author', args=[recipe.id]))
+        self.assertRedirects(response, f'/login/?next={reverse("recipes:author", args=[recipe.id])}')
+
+    # with auth
     def test_list_redirect_with_auth(self):
         login = self.client.login(username='testuser', password='testpassword')
         response = self.client.get(reverse('recipes:recipes'))
@@ -85,3 +93,37 @@ class RecipeAuthTest(TestCase):
         self.assertTrue(login)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'recipes/recipes_details.html')
+
+    def test_author_redirect_with_auth(self):
+        login = self.client.login(username='testuser', password='testpassword')
+        recipe = Recipe.objects.get(id=1)
+        response = self.client.get(reverse('recipes:author', args=[recipe.id]))
+        self.assertTrue(login)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'recipes/recipes_author.html')
+
+
+# Test forms
+class RecipeFormsTest(TestCase):
+    def setUpTestData():
+        user = User.objects.create_user(username='testuser', password='testpassword')
+        Recipe.objects.create(
+            name='Test Recipe',
+            cooking_time=30,
+            ingredients='Ingredient 1, Ingredient 2',
+            instructions='Step 1, Step 2',
+            pic='test_pic.jpg',
+            author=user
+        )
+    
+    def test_recipes_search_form(self):
+        form_data = {'recipe_name': 'Pancakes', 'chart_type': 'bar_chart'}
+        form = RecipesSearchForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_create_recipe_form(self):
+        form_data = Recipe.objects.get(id=1).__dict__
+        form = CreateRecipeForm(data=form_data)
+        self.assertTrue(form.is_valid())
+        
+
