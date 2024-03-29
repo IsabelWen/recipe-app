@@ -32,8 +32,7 @@ Hosted on Netlify:
 ## Set up this App
 1. Clone this repository.
 2. Navigate to the recipe-app folder and run ```pip install -r requirements/dev.txt```
-3. Setup Database by configuring ```DATABASES``` in the ```settings``` folder in ```dev.py``` for development and in ```prod.py``` for production. 
-4. Run migrations with ```python manage.py migrate```
+3. Setup Database by configuring ```DATABASES``` in the ```settings``` folder in ```dev.py``` for development.
+4. Run migrations with ```make dev-migrate```
 5. Create a superuser by running ```python manage.py createsuperuser```
-6. Run ```python manage.py runserver``` to check out the app in your browser under ```http://127.0.0.1:8000```
-
+6. Run ```make dev-start``` to check out the app in your browser under ```http://127.0.0.1:8000```
