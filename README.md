@@ -8,6 +8,10 @@ A recipe app with a MySQL database at the server side, and the client side rende
 * pandas (2.0.3)
 * matplotlib (3.7.5)
 * django-environ (0.11.2)
+* gunicorn (21.2.0)
+* dj-database-url (2.1.0)
+* psycopg2-binary (2.8.6)
+* whitenoise (6.6.0)
 
 ## Link to app
 Hosted on Netlify: 

@@ -1,5 +1,4 @@
 import environ
-
 from .base import *
 
 env = environ.Env(DEBUG=(bool, True))
