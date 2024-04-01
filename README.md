@@ -1,7 +1,23 @@
 # Recipe App
 ## Project description
 ![recipe-app](https://github.com/IsabelWen/recipe-app/assets/85120051/2cacaedf-28e6-45e3-9840-5b27b2a97a9b)
-A recipe app with a MySQL database at the server side, and the client side renders HTML- and CSS-based pages via the Django framework. This application lets the users sign up and create their own content. The user can create and edit recipes, including their ingredients, cooking time, and difficulty level.
+A recipe app with a PostgreSQL database at the server side, and the client side renders HTML- and CSS-based pages via the Django framework. This application lets the users sign up and create their own content. The user can create and edit recipes, including their ingredients, cooking time, and difficulty level.
+
+## Project Exploration
+* On the homepage, the user can click on ```Create new recipe``` to add a new recipe.
+![recipe-app-1](https://github.com/IsabelWen/recipe-app/assets/85120051/e5b1c5a2-f5e6-48b4-889a-14a06202b73d)
+
+* When viewing the details of a recipe, users have the option to click on ```Update``` to modify the recipe. However, this functionality is restricted to the user's own recipes and cannot be applied to recipes of other users.
+![recipe-app-2](https://github.com/IsabelWen/recipe-app/assets/85120051/ea6fb597-2374-4cb7-b34e-ff693908c69f)
+
+* When viewing the details of a recipe, users have the option to click on ```Delete``` to remove the recipe. However, this functionality is restricted to the user's own recipes and cannot be applied to recipes of other users.
+![recipe-app-5](https://github.com/IsabelWen/recipe-app/assets/85120051/13adfe4f-6877-4edf-937f-d4ad2d1cd368)
+
+* When clicking on the recipe author's name, users can view the author's biography, profile picture, and all the recipes they have shared.
+![recipe-app-4](https://github.com/IsabelWen/recipe-app/assets/85120051/0f7bc732-4a8a-41db-bb9d-bcd82463b80d)
+
+* When searching for recipes or ingredients, users have the option to view data analytics of the search results in formats such as 'Bar Chart,' 'Line Chart,' or 'Pie Chart,' displayed below the search results.
+![recipe-app-a](https://github.com/IsabelWen/recipe-app/assets/85120051/ee8b7ad8-c3ba-4fd5-b5a0-e210baba5def)
 
 ## Project dependencies
 ### Dependencies used in production
