@@ -30,7 +30,7 @@ When searching for recipes or ingredients, users have the option to view data an
 
 
 ## Project dependencies
-### Dependencies used in production
+### Dependencies used in development
 * Django (4.2.11)
 * pillow (10.2.0)
 * pandas (2.0.3)
@@ -38,7 +38,7 @@ When searching for recipes or ingredients, users have the option to view data an
 * django-environ (0.11.2)
 * numpy (1.24.4)
 
-### Dependencies used in development
+### Dependencies used in production
 * gunicorn (21.2.0)
 * dj-database-url (2.1.0)
 * psycopg2-binary (2.8.6)
