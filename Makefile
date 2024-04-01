@@ -6,6 +6,8 @@ dev-makemigrations:
 	python manage.py makemigrations --settings=recipe_project.settings.dev
 dev-test:
 	python manage.py test --settings=recipe_project.settings.dev
+dev-superuser:
+	python manage.py createsuperuser --settings=recipe_project.settings.dev
 
 #production
 prod-start:
@@ -16,6 +18,9 @@ prod-makemigrations:
 	python manage.py makemigrations --settings=recipe_project.settings.prod
 prod-test:
 	python manage.py test --settings=recipe_project.settings.prod
+prod-superuser:
+	python manage.py createsuperuser --settings=recipe_project.settings.prod
 
+# Install requirements
 install-dev:
 	pip install -r requirements/dev.txt
