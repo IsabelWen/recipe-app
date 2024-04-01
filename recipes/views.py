@@ -9,6 +9,7 @@ from .utils import get_recipename_from_id, get_chart
 from django.db.models import Q
 from django.urls import reverse
 from users.models import User
+from django.core.paginator import Paginator, EmptyPage
 
 # Create your views here.
 def home(request):
@@ -16,19 +17,25 @@ def home(request):
 
 def about(request):
    return render(request, 'recipes/about_me.html')
+
 class RecipesListView(ListView):
    model = Recipe
 
    def get(self, request):
       form = RecipesSearchForm()
       recipes = Recipe.objects.all()
-      return render(request, 'recipes/recipes_list.html', {'form': form, 'recipes': recipes})
+      paginator = Paginator(recipes, 6)
+      page_number = request.GET.get('page', 1)
+      try:
+         recipes = paginator.page(page_number)
+      except EmptyPage:
+         recipes = paginator.page(paginator.num_pages)
+      return render(request, 'recipes/recipes_list.html', {'form': form, 'recipes': recipes, 'page_obj': recipes})
    
    def post(self, request):
       form = RecipesSearchForm(request.POST)
       recipes = Recipe.objects.all()
       chart = None
-
 
       if form.is_valid():
          recipe_name = form.cleaned_data.get('recipe_name')

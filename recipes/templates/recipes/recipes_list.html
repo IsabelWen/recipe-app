@@ -127,6 +127,13 @@
             margin-top: 30px;
         }
 
+        .pagination .link {
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
         @media all and (max-width: 550px) {
             main {
                 margin-top: 30px;
@@ -226,6 +233,24 @@
                         </li>
                     {% endfor %}
                 </ul>
+                <!--Pagination Start -->
+                <div class="pagination">
+                    <span class="pagination-links">
+                
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}" class="link">&larr;&nbsp;</a>
+                        {% endif %}
+                        
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}" class="link">&nbsp;&rarr;</a>
+                        {% endif %}
+                    </span>
+                </div>
+                <!--Pagination End -->
             {% endif %}
         </div>
     </main>
