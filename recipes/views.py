@@ -24,7 +24,7 @@ class RecipesListView(ListView):
    def get(self, request):
       form = RecipesSearchForm()
       recipes = Recipe.objects.all()
-      paginator = Paginator(recipes, 6)
+      paginator = Paginator(recipes, 9)
       page_number = request.GET.get('page', 1)
       try:
          recipes = paginator.page(page_number)

@@ -32,6 +32,7 @@
 
         .left {
             padding-right: 35px;
+            max-width: 40vw;
         }
 
         .left img {
@@ -203,7 +204,7 @@
     <h2>{{object.name}}</h2>
     <main>
         <div class="left">
-        <img src="{{object.pic.url}}" />
+            <img src="{{object.pic.url}}" />
         </div>
         <div class="details">
             <p><b>Author: </b><a href="{% url 'recipes:author' object.author.pk %}">{{ object.author|capfirst }}</a></p>
