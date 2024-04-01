@@ -1,7 +1,6 @@
 from .base import *
 import environ
 import dj_database_url
-import os
 
 # add new config for production
 env = environ.Env(DEBUG=(bool, False))
