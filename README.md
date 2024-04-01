@@ -16,7 +16,7 @@ When viewing the details of a recipe, users have the option to click on ```Updat
 
 When viewing the details of a recipe, users have the option to click on ```Delete``` to remove the recipe. However, this functionality is restricted to the user's own recipes and cannot be applied to recipes of other users.
 
-![recipe-app-5](https://github.com/IsabelWen/recipe-app/assets/85120051/13adfe4f-6877-4edf-937f-d4ad2d1cd368)
+![recipe-app-5](https://github.com/IsabelWen/recipe-app/assets/85120051/500b456a-04de-44f7-b682-e01c849697e5)
 
 
 When clicking on the recipe author's name, users can view the author's biography, profile picture, and all the recipes they have shared.
