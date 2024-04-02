@@ -44,6 +44,7 @@ When searching for recipes or ingredients, users have the option to view data an
 * psycopg2-binary (2.8.6)
 * whitenoise (6.6.0)
 * Brotli (1.1.0)
+* django-cloudinary-storage (0.3.0)
 
 ## Link to app
 Hosted on Netlify: https://recipe-app-hedk.onrender.com/

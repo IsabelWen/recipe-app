@@ -22,18 +22,15 @@ DATABASES = {
     )
 }
 
+# Cloudinary config
+CLOUDINARY_CLOUD_NAME = str("CLOUDINARY_CLOUD_NAME"),
+CLOUDINARY_API_KEY = str("CLOUDINARY_API_KEY"),
+CLOUDINARY_API_SECRET = str("CLOUDINARY_API_SECRET"),
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT= BASE_DIR / 'media'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-
-#STORAGES = {
-#    'staticfiles': {
-#        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-#    }
-#}

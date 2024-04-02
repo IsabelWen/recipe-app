@@ -7,9 +7,9 @@ import pandas as pd
 from .forms import RecipesSearchForm, CreateRecipeForm
 from .utils import get_recipename_from_id, get_chart
 from django.db.models import Q
-from django.urls import reverse
 from users.models import User
 from django.core.paginator import Paginator, EmptyPage
+from cloudinary.utils import cloudinary_url
 
 # Create your views here.
 def home(request):
@@ -20,7 +20,7 @@ def about(request):
 
 class RecipesListView(ListView):
    model = Recipe
-
+   
    def get(self, request):
       form = RecipesSearchForm()
       recipes = Recipe.objects.all()
@@ -45,6 +45,7 @@ class RecipesListView(ListView):
          if qs.exists():
             recipes = pd.DataFrame(qs.values())
             recipes['difficulty'] = recipes.apply(lambda row: get_recipename_from_id(row['id']).difficulty, axis=1)
+            recipes['pic'] = recipes.apply(lambda row: cloudinary_url(row['pic'])[0] if 'pic' in row else None, axis=1)
             chart = get_chart(chart_type, recipes, labels=recipes['id'].values)
          else:
             recipes = pd.DataFrame()
@@ -81,6 +82,7 @@ def create_recipe(request):
       if form.is_valid():
          recipe = form.save(commit=False)
          recipe.author = request.user
+
          recipe.save()
       else:
          print('Something went wrong.')

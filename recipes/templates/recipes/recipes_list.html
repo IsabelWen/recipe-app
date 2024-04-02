@@ -212,7 +212,7 @@
                         <li>
                             <a href="{% url 'recipes:detail' pk=recipe.id %}">
                                 <h2>{{ recipe.name }}</h2>
-                                <img src="/media/{{ recipe.pic }}" />
+                                <img src="{{ recipe.pic }}" />
                             </a>
                         </li>
                     {% endfor %}

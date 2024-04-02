@@ -18,4 +18,4 @@ class CustomUserCreationForm(UserCreationForm):
         # Customize help texts
         self.fields['username'].help_text = None
         self.fields['password1'].help_text = "Your password must contain at least 8 characters and can't be entirely numeric."
-        #self.fields['password2'].help_text = None
+        self.fields['pic'].required = True
