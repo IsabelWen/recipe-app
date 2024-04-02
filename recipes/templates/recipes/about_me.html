@@ -72,6 +72,40 @@
             height: 35px;
         }
 
+        .icon {
+            text-decoration: none;
+        }
+
+        .icon .tooltip {
+            visibility: hidden;
+            width: 70px;
+            background-color: rgba(103, 103, 103, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 3px 0;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 2;
+            margin-left: -17.5px;
+            margin-top: 3px;
+            font-size: 14px;
+        }
+
+        .icon:hover .tooltip {
+            visibility: visible;
+        }
+
+        .icon .tooltip::after {
+            content: " ";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent rgba(103, 103, 103, 0.7) transparent;
+        }
+
         @media all and (max-width: 550px) {
             .main-box {
                 padding: 10px 15px;
@@ -105,16 +139,19 @@
             <p>I'm based in Rostock and open to remote roles.<br>
                 Feel free to connect with me via Email or on LinkedIn!</p>
             <p><b>Email: </b><a href="mailto:isabel.matula(at)outlook(dot)de" class="link">isabel.matula@outlook.de</a></p>
-            <p>Here you can check out my GitHub page, portfolio page and LinkedIn profile:</p>
+            <p>Here you can check out my <b>GitHub</b> page, <b>portfolio</b> page and <b>LinkedIn</b> profile:</p>
             <div class="icons-container">
                 <a href="https://github.com/IsabelWen" class="icon" target="_blank">
-                    <img src="{% static 'recipes/images/github.svg' %}" alt="LinkedIn">
+                    <img src="{% static 'recipes/images/github.svg' %}" alt="GitHub"><br/>
+                    <span class="tooltip">GitHub</span>
                 </a>
                 <a href="https://isabelwen.github.io/portfolio-website/" class="icon" target="_blank">
-                    <img src="{% static 'recipes/images/isabel-matula-icon.ico' %}" alt="LinkedIn">
+                    <img src="{% static 'recipes/images/isabel-matula-icon.ico' %}" alt="Portfolio "><br/>
+                    <span class="tooltip">Portfolio</span>
                 </a>
                 <a href="https://www.linkedin.com/in/isabel-matula" class="icon" target="_blank">
-                    <img src="{% static 'recipes/images/linkedin.svg' %}" alt="LinkedIn">
+                    <img src="{% static 'recipes/images/linkedin.svg' %}" alt="LinkedIn"><br/>
+                    <span class="tooltip">LinkedIn</span>
                 </a>
             </div>
         </div>
