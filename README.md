@@ -47,7 +47,7 @@ When searching for recipes or ingredients, users have the option to view data an
 * django-cloudinary-storage (0.3.0)
 
 ## Link to app
-Hosted on Netlify: https://recipe-app-hedk.onrender.com/
+Hosted on Render: https://recipe-app-hedk.onrender.com/
 
 ## Key Features
 * Allow for user authentication, login, and logout.
