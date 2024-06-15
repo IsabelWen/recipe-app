@@ -9,7 +9,7 @@ class CustomUserCreationForm(UserCreationForm):
     bio = forms.CharField(widget=forms.Textarea, required=False)
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ("username", "name", "pic", "bio", "password1", "password2")
 
     def __init__(self, *args, **kwargs):
