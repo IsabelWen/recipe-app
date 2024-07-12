@@ -46,9 +46,6 @@ When searching for recipes or ingredients, users have the option to view data an
 * Brotli (1.1.0)
 * django-cloudinary-storage (0.3.0)
 
-## Link to app
-Hosted on Render: https://recipe-app-hedk.onrender.com/
-
 ## Key Features
 * Allow for user authentication, login, and logout.
 * Let users search for recipes according to ingredients.
